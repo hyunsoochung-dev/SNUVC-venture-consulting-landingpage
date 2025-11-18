@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNUVC - SNU Venture Consulting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+        }
+
+        /* Navigation */
+        nav {
+            background: #000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            max-width: 200px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #d1d5db;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links .btn-contact {
+            background: white;
+            color: black;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .nav-links .btn-contact:hover {
+            background: #e5e7eb;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #000;
+            color: white;
+            padding: 10rem 2rem 5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero .highlight {
+            color: #d1d5db;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: white;
+            color: black;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.125rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #e5e7eb;
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-bg-gray {
+            background: #f9fafb;
+        }
+
+        .section-bg-white {
+            background: white;
+        }
+
+        .section-bg-black {
+            background: #000;
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .section-bg-black .section-title h2 {
+            color: white;
+        }
+
+        .section-title p {
+            font-size: 1.25rem;
+            color: #6b7280;
+        }
+
+        .section-bg-black .section-title p {
+            color: #9ca3af;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: #6b7280;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: #6b7280;
+        }
+
+        /* Investor Cards */
+        .investor-card {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #111827;
+            transition: all 0.3s;
+        }
+
+        .investor-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .investor-card h4 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .investor-card .position {
+            color: #374151;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .investor-card .description {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .investor-card-coming {
+            background: #111827;
+            border-color: #111827;
+        }
+
+        .investor-card-coming h4 {
+            color: #9ca3af;
+        }
+
+        .investor-card-coming .position {
+            color: #6b7280;
+        }
+
+        .investor-card-coming .description {
+            color: #6b7280;
+        }
+
+        .investor-section-header {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        .investor-section-header span {
+            margin-right: 0.75rem;
+        }
+
+        .investor-banner {
+            background: #111827;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            margin-top: 3rem;
+        }
+
+        .investor-banner h4 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+        }
+
+        .investor-banner p {
+            font-size: 1.125rem;
+            color: #d1d5db;
+        }
+
+        /* Team Card */
+        .team-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            border-color: #111827;
+        }
+
+        .team-photo {
+            width: 128px;
+            height: 128px;
+            background: #e5e7eb;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-card h4 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .department {
+            color: #374151;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-card .year {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* Service Card */
+        .service-card {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .service-card h3 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .service-list svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .service-list span {
+            color: #374151;
+        }
+
+        /* Form */
+        .form-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #111827;
+            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: #111827;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #1f2937;
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status-message {
+            text-align: center;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        .status-success {
+            color: #059669;
+            font-weight: 600;
+        }
+
+        .status-error {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer h4 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        footer .copyright {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="SNUVC">
+            </div>
+            <div class="nav-links">
+                <a href="#about">소개</a>
+                <a href="#investors">투자자 네트워크</a>
+                <a href="#team">팀 소개</a>
+                <a href="#services">서비스</a>
+                <a href="#contact" class="btn-contact">문의하기</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container fade-in">
+            <h1>
+                글로벌 VC 인사이트를<br/>
+                <span class="highlight">학생 창업가에게</span>
+            </h1>
+            <p>
+                서울대학교 학부생들이 한국과 실리콘밸리의 정상급 벤처캐피탈리스트들을 만나 얻은 인사이트를 바탕으로,
+                학생 및 초기 창업가들에게 실질적인 컨설팅과 액셀러레이팅을 제공합니다.
+            </p>
+            <a href="#contact" class="btn-primary">무료 상담 신청하기</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-bg-gray">
+        <div class="container">
+            <div class="section-title">
+                <h2>SNUVC는?</h2>
+                <p>서울대학교 학부생으로 구성된 벤처 컨설팅 팀</p>
+            </div>
+            <div class="grid grid-3">
+                <div class="card">
+                    
+                    <h3>실전 인사이트</h3>
+                    <p>한국과 실리콘밸리의 정상급 VC들과의 직접 미팅을 통해 얻은 실질적인 투자 인사이트</p>
+                </div>
+                <div class="card">
+                    
+                    <h3>맞춤형 지원</h3>
+                    <p>학생 및 초기 창업가의 눈높이에 맞춘 실질적인 컨설팅과 액셀러레이팅 프로그램</p>
+                </div>
+                <div class="card">
+                    
+                    <h3>네트워크 연결</h3>
+                    <p>글로벌 VC 네트워크와의 직접적인 연결 기회 제공</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investors Section -->
+    <section id="investors" class="section-bg-white">
+        <div class="container">
+            <div class="section-title">
+                <h2>투자자 네트워크</h2>
+                <p>SNUVC가 만나고 인사이트를 얻은 투자 전문가들</p>
+            </div>
+            
+            <!-- Korea -->
+            <div style="margin-bottom: 3rem;">
+                <h3 class="investor-section-header">
+                    <span>🇰🇷</span> Korea
+                </h3>
+                <div class="grid grid-3">
+                    <div class="investor-card">
+                        <h4>한국투자증권</h4>
+                        <p class="position">이사</p>
+                        <p class="description">한국 대표 금융기관의 벤처투자 전문가와의 스터디 및 인사이트</p>
+                    </div>
+                    <div class="investor-card">
+                        <h4>블루포인트파트너스</h4>
+                        <p class="position">심사역</p>
+                        <p class="description">초기 스타트업 투자 전문 VC와의 스터디 및 인사이트</p>
+                    </div>
+                    <div class="investor-card">
+                        <h4>서울대학교</h4>
+                        <p class="position">이영민 서울대학교 경영대학 교수</p>
+                        <p class="description">서울대학교 교수님과의 스터디 및 인사이트</p>
+                    </div>
+                    <div class="investor-card">
+                        <h4>Intervest</h4>
+                        <p class="position">수석심사역</p>
+                        <p class="description">Intervest 수석심사역과의 스터디 및 인사이트</p>
+                    </div>
+                    <div class="investor-card investor-card-coming">
+                        <h4>추후 공개 예정</h4>
+                        <p class="position">Coming Soon</p>
+                        <p class="description">글로벌 네트워크 확장 중</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Silicon Valley -->
+            <div>
+                <h3 class="investor-section-header">
+                    <span>🇺🇸</span> Silicon Valley
+                </h3>
+                <div class="grid grid-3">
+                    <div class="investor-card investor-card-coming">
+                        <h4>추후 공개 예정</h4>
+                        <p class="position">Coming Soon</p>
+                        <p class="description">실리콘밸리 VC 미팅 진행 중</p>
+                    </div>
+                    <div class="investor-card investor-card-coming">
+                        <h4>추후 공개 예정</h4>
+                        <p class="position">Coming Soon</p>
+                        <p class="description">실리콘밸리 VC 미팅 진행 중</p>
+                    </div>
+                    <div class="investor-card investor-card-coming">
+                        <h4>추후 공개 예정</h4>
+                        <p class="position">Coming Soon</p>
+                        <p class="description">실리콘밸리 VC 미팅 진행 중</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="investor-banner">
+                <h4>더 많은 글로벌 VC들과 만남 예정</h4>
+                <p>한국과 실리콘밸리의 정상급 벤처캐피탈과의 네트워크를 지속적으로 확장하고 있습니다</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section-bg-gray">
+        <div class="container">
+            <div class="section-title">
+                <h2>팀 소개</h2>
+                <p>서울대학교 학부생으로 구성된 SNUVC 팀원들</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/1.jpg" alt="박도현">
+                    </div>
+                    <h4>박도현</h4>
+                    <p class="department">자유전공학부</p>
+                    <p class="year">21학번</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/2.jpg" alt="강희석">
+                    </div>
+                    <h4>강희석</h4>
+                    <p class="department">자유전공학부</p>
+                    <p class="year">24학번</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/3.jpg" alt="이지우">
+                    </div>
+                    <h4>이지우</h4>
+                    <p class="department">자유전공학부</p>
+                    <p class="year">24학번</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/4.jpg" alt="정현수">
+                    </div>
+                    <h4>정현수</h4>
+                    <p class="department">자유전공학부</p>
+                    <p class="year">24학번</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/5.jpg" alt="김우성">
+                    </div>
+                    <h4>김우성</h4>
+                    <p class="department">학부대학 광역</p>
+                    <p class="year">25학번</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/6.jpg" alt="기태현">
+                    </div>
+                    <h4>기태현</h4>
+                    <p class="department">학부대학 광역</p>
+                    <p class="year">25학번</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-bg-white">
+        <div class="container">
+            <div class="section-title">
+                <h2>제공 서비스</h2>
+                <p>학생 및 초기 창업가를 위한 맞춤형 지원</p>
+            </div>
+            <div class="grid grid-2">
+                <div class="service-card">
+                    <h3> 벤처 컨설팅</h3>
+                    <ul class="service-list">
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>비즈니스 모델 검증 및 개선</span>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>투자 유치 전략 수립</span>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>피칭 덱 및 사업계획서 리뷰</span>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>시장 조사 및 경쟁 분석</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>액셀러레이팅</h3>
+                    <ul class="service-list">
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>멘토링 및 정기 미팅</span>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>VC 네트워크 연결 지원</span>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>창업 초기 단계별 가이드</span>
+                        </li>
+                        <li>
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>실전 VC 인사이트 공유</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-bg-black">
+        <div class="container">
+            <div class="section-title">
+                <h2>지금 바로 시작하세요</h2>
+                <p>무료 상담 신청하고 글로벌 VC 인사이트를 경험해보세요</p>
+            </div>
+            <div class="form-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">이름 *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">이메일 *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">소속 / 프로젝트명</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">문의 내용 *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">문의하기</button>
+                    <p id="statusMessage" class="status-message"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h4>SNUVC</h4>
+            <p>SNU Venture Consulting</p>
+            <p class="copyright">© 2025 SNUVC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Google Apps Script Web App URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw4BEzaKLK_X7EQPPbxcUq6NLg8gWvbDmuIWPSyYxigDUQqsShswU8LjQqk7WvFPZiR/exec';
+        
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 폼 제출 처리
+        const form = document.getElementById('contactForm');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // 폼 데이터 수집
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toLocaleString('ko-KR')
+            };
+            
+            // 버튼 비활성화
+            submitButton.disabled = true;
+            submitButton.textContent = '전송 중...';
+            statusMessage.textContent = '';
+            
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                statusMessage.textContent = '✅ 문의가 성공적으로 전송되었습니다!';
+                statusMessage.className = 'status-message status-success';
+                form.reset();
+                
+            } catch (error) {
+                statusMessage.textContent = '❌ 전송 실패. 다시 시도해주세요.';
+                statusMessage.className = 'status-message status-error';
+                console.error('Error:', error);
+            } finally {
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = '문의하기';
+                }, 3000);
+            }
+        });
+
+        // 스크롤 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
